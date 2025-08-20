@@ -1,18 +1,26 @@
 const renderDirections = ["nw", "ne", "sw", "se"];
-document.addEventListener('keydown', function (e) {
-    if (e.key === 'n') {
-        createNode(document.querySelector('button'))
-    }
-})
 function createNode(obj) {
     obj.classList.add('btn-selected')
+    const element = document.createElement('div')
     document.querySelector('.root').addEventListener('click', function (e) {
-        const element = document.createElement('div')
         element.className = "target"
         element.style.left = `${e.clientX}px`
         element.style.top = `${e.clientY}px`
         element.style.transform = `translate(-50%, -50%)`
         element.innerHTML = "Target"
+        element.addEventListener('dblclick', function (e) {
+            e.stopPropagation();
+            element.innerHTML = `<input type="text" value="${element.innerHTML}" />`;
+            element.querySelector('input').focus();
+            element.querySelector('input').addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') {
+                    element.innerHTML = e.target.value;
+                }
+            })
+            element.querySelector('input').addEventListener('blur', function (e) {
+                element.innerHTML = e.target.value;
+            })
+        })
         document.querySelector(".container").appendChild(element)
         obj.classList.remove('btn-selected')
     }, { once: true });
@@ -41,7 +49,7 @@ moveable.on("resize", ({ target, width, height, dist, delta, clientX, clientY })
     // console.log("onResize", target);
     delta[0] && (target.style.width = `${width}px`);
     delta[1] && (target.style.height = `${height}px`);
-    target.style.fontSize = `${Math.min(width, height) / 4}px`;
+    // target.style.fontSize = `${Math.min(width, height) / 4}px`;
     // console.log(target);
 
 })
