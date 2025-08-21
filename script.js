@@ -7,9 +7,7 @@ function createNode(obj) {
         element.style.left = `${e.clientX}px`
         element.style.top = `${e.clientY}px`
         element.style.transform = `translate(-50%, -50%)`
-        element.innerHTML = "Target"
-        element.addEventListener('dblclick', function (e) {
-            e.stopPropagation();
+        element.addEventListener('dblclick', function () {
             element.innerHTML = `<input type="text" value="${element.innerHTML}" />`;
             element.querySelector('input').focus();
             element.querySelector('input').addEventListener('keydown', function (e) {
@@ -23,6 +21,9 @@ function createNode(obj) {
         })
         document.querySelector(".container").appendChild(element)
         obj.classList.remove('btn-selected')
+        setTimeout(() => {
+            element.dispatchEvent(new MouseEvent('dblclick', { bubbles: true, cancelable: true, view: window }));
+        }, 0);
     }, { once: true });
 };
 const selectoRef = new Selecto({
@@ -41,9 +42,18 @@ const moveable = new Moveable(document.querySelector(`.container`), {
     resizable: true,
     renderDirections: renderDirections,
     pinchable: true,
+    roundable: true,
+    // keepRatio: true,
     useResizeObserver: true,
     origin: false,
     edge: true,
+
+    padding: {
+        top: 6,
+        right: 7,
+        bottom: 8,
+        left: 8
+    }
 });
 moveable.on("resize", ({ target, width, height, dist, delta, clientX, clientY }) => {
     // console.log("onResize", target);
@@ -53,7 +63,9 @@ moveable.on("resize", ({ target, width, height, dist, delta, clientX, clientY })
     // console.log(target);
 
 })
-
+moveable.on("round", (e) => {
+    e.target.style.borderRadius = e.borderRadius;
+});
 
 moveable.on("drag", e => {
     e.target.style.transform = e.transform;
@@ -82,4 +94,12 @@ selectoRef.on("selectEnd", e => {
         });
     }
     moveable.target = e.selected;
+});
+moveable.on("resizeGroup", ({ events }) => {
+    events.forEach(ev => {
+        ev.target.style.width = `${ev.width}px`;
+        ev.target.style.height = `${ev.height}px`;
+        ev.target.style.transform = ev.drag.transform;
+
+    });
 });

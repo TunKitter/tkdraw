@@ -10,20 +10,20 @@ body {
 }
 
 .target {
+    position: relative;
     width: max-content;
     overflow: hidden;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: black;
     padding: 5px 1em;
     border-radius: 2px;
-    /* box-shadow: 2px 2px 1px #ea226544; */
     color: white;
+    border: 2px solid black;
+    color: black;
     position: absolute;
     word-break: keep-all;
-    /* flex-wrap: wrap; */
 }
 
 .root {
@@ -36,11 +36,33 @@ body {
 
 .toolbar button {
     background-color: transparent;
-    padding: 5px 10px;
     outline: none;
-    border: 1px solid black;
-    border-radius: 5px;
+    border: none;
+    width: 100%;
+    padding: 10px 1em;
+
+    background-color: #ff73ea;
+    /* border: 2px solid black; */
+    border-bottom: 3px solid black;
+    /* border-radius: 5px; */
     /* color: white; */
+    /* font-weight: bold; */
+}
+
+.toolbar button:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+}
+
+.toolbar button:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.toolbar button:hover {
+    background: white;
+    color: black;
 }
 
 button.btn-selected {
@@ -50,19 +72,19 @@ button.btn-selected {
 
 .toolbar {
     position: fixed;
-    top: 0;
+    top: 2%;
     left: 25%;
     z-index: 1000;
     background: white;
-    border-left: 10px solid black;
-    box-shadow: 5px 5px 1px black;
+    border: 2px solid black;
+    /* border-left: 1em solid black; */
     border-radius: 12px;
     width: 50%;
-    padding: 10px;
+    display: flex;
+    justify-content: space-around;
 }
 
 .target input {
-    color: white;
     background: transparent;
     outline: none;
     border: none;
