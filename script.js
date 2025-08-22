@@ -27,7 +27,6 @@ function createNode(obj) {
     }, { once: true });
 };
 const selectoRef = new Selecto({
-    container: document.querySelector(`.select`),
     dragContainer: document.querySelector(`.root`),
     selectableTargets: [".target"],
     hitRate: 0,
@@ -54,6 +53,12 @@ const moveable = new Moveable(document.querySelector(`.container`), {
         bottom: 8,
         left: 8
     }
+});
+
+const inf = new InfiniteViewer(document.querySelector('.root'), {
+    displayHorizontalScroll: false,
+    displayVerticalScroll: false,
+    useAutoZoom: true,
 });
 moveable.on("resize", ({ target, width, height, dist, delta, clientX, clientY }) => {
     // console.log("onResize", target);
