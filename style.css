@@ -34,6 +34,23 @@ body {
     overflow: hidden;
 }
 
+.toolbar::before {
+    content: '❤';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: -76px;
+    width: 10%;
+    box-sizing: border-box;
+    height: 100%;
+    background-color: #ff73ea;
+    border: 2px solid black;
+    border-bottom: 5px solid black;
+    border-radius: 12px;
+}
+
 .toolbar button {
     background-color: transparent;
     outline: none;
@@ -90,3 +107,21 @@ button.btn-selected {
     border: none;
     width: 100%;
 }
+
+/* .zoom,
+.info {
+    position: fixed;
+    bottom: 5%;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 12px;
+    box-shadow: 1px 4px 1px #ff73ea;
+    z-index: 99999;
+}
+
+.info {
+    right: 1%;
+    padding: 10px 2em;
+} */

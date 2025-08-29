@@ -1,8 +1,15 @@
+import InfiniteViewer from "infinite-viewer";
+import Moveable from "moveable";
+import Selecto from "selecto";
+
 const renderDirections = ["nw", "ne", "sw", "se"];
-function createNode(obj) {
+document.querySelector('button')?.addEventListener('click', function (e) {
+    createNode(e.target as HTMLElement)
+})
+function createNode(obj: HTMLElement) {
     obj.classList.add('btn-selected')
     const element = document.createElement('div')
-    document.querySelector('.root').addEventListener('click', function (e) {
+    document.querySelector('.root')!.addEventListener('click', function (e: MouseEvent) {
         element.className = "target"
         element.style.left = `${e.clientX}px`
         element.style.top = `${e.clientY}px`
