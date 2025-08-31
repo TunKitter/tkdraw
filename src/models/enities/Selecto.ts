@@ -1,9 +1,9 @@
 import Selecto from "selecto";
-import G from "../global";
+import G from "../../global";
 export function initSelecto() {
     G.selecto = new Selecto({
         dragContainer: document.querySelector(`.root`),
-        selectableTargets: [".target"],
+        selectableTargets: [".skeleton"],
         hitRate: 0,
         selectByClick: true,
         selectFromInside: false,

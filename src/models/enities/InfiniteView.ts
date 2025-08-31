@@ -1,5 +1,5 @@
 import InfiniteViewer from "infinite-viewer";
-import G from "../global";
+import G from "../../global";
 
 
 export function initInfiniteView() {

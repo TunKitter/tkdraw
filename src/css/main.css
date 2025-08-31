@@ -9,23 +9,6 @@ body {
     overflow: hidden;
 }
 
-.target {
-    position: relative;
-    width: max-content;
-    overflow: hidden;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5px 1em;
-    border-radius: 2px;
-    color: white;
-    border: 2px solid black;
-    color: black;
-    position: absolute;
-    word-break: keep-all;
-}
-
 .root {
     position: relative;
     /* border: 2px solid; */

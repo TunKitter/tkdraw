@@ -1,5 +1,5 @@
 import Moveable from "moveable";
-import G from "../global";
+import G from "../../global";
 export function initMoveable() {
 
     G.moveable = new Moveable(document.querySelector(`.container`)!, {
@@ -10,6 +10,7 @@ export function initMoveable() {
         pinchable: true,
         roundable: true,
         // keepRatio: true,
+        // checkInput: true,
         useResizeObserver: true,
         origin: false,
         edge: true,
@@ -21,7 +22,6 @@ export function initMoveable() {
             left: 8
         }
     });
-
     G.moveable.on("resize", ({ target, width, height, delta }) => {
         delta[0] && (target.style.width = `${width}px`);
         delta[1] && (target.style.height = `${height}px`);
