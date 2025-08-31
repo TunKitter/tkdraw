@@ -8,7 +8,7 @@ export function initMoveable() {
         resizable: true,
         renderDirections: ["nw", "ne", "sw", "se"],
         pinchable: true,
-        roundable: true,
+        // roundable: true,
         // keepRatio: true,
         // checkInput: true,
         useResizeObserver: true,
@@ -27,9 +27,9 @@ export function initMoveable() {
         delta[1] && (target.style.height = `${height}px`);
 
     })
-    G.moveable.on("round", (e) => {
-        e.target.style.borderRadius = e.borderRadius;
-    });
+    // G.moveable.on("round", (e) => {
+    // e.target.style.borderRadius = e.borderRadius;
+    // });
 
     G.moveable.on("drag", e => {
         e.target.style.transform = e.transform;
