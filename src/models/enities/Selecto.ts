@@ -16,6 +16,7 @@ export function initSelecto() {
         if (G.moveable.isMoveableElement(target)) e.stop();
     });
     G.selecto.on("selectEnd", e => {
+        document.querySelector('.tools')!.style.display = e.selected.length ? 'block' : 'none';
         if (e.isDragStart) {
             e.inputEvent.preventDefault();
             G.moveable.waitToChangeTarget().then(() => {

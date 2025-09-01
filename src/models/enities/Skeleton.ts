@@ -39,7 +39,7 @@ class Skeleton {
             if (event.key === 'Enter') {
                 event.preventDefault();
                 this.getELement().setAttribute('contenteditable', 'false');
-                G.moveable.target = null
+                // G.moveable.target = null
             }
         }
     }
