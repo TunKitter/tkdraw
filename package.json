@@ -6,9 +6,12 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "demo": "gulp"
   },
   "devDependencies": {
+    "gulp": "^5.0.1",
+    "through2": "^4.0.2",
     "typescript": "~5.8.3",
     "vite": "^7.1.2"
   },
