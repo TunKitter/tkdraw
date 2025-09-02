@@ -1,5 +1,6 @@
-import classes from '../../../css/module/skeleton_property/skeleton.property.base.module.css'
-class BaseSkeletonProperty {
+import classes from '../../css/module/skeleton_property/skeleton.property.module.css'
+import type SkeletonPropertyItem from './SkeletonPropertyItem';
+class SkeletonProperty {
     private wrapper: HTMLElement;
     constructor() {
         this.wrapper = document.createElement('div');
@@ -15,5 +16,11 @@ class BaseSkeletonProperty {
     show() {
         this.wrapper.style.display = 'block';
     }
+    remove() {
+        this.wrapper.remove();
+    }
+    addItem(item: SkeletonPropertyItem) {
+        this.wrapper.appendChild(item.getElement());
+    }
 }
-export default BaseSkeletonProperty
+export default SkeletonProperty
