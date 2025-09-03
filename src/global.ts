@@ -6,6 +6,7 @@ import type Selecto from "selecto"
 const G = {
     moveable: null as Moveable,
     selecto: null as Selecto,
-    infiniteView: null as InfiniteViewer
+    infiniteView: null as InfiniteViewer,
+    html: { skeleton_property: null as HTMLElement },
 }
 export default G

@@ -7,7 +7,7 @@ function mergePropertyItem() {
         html += (file.contents.toString());
         cb(null, html);
     })).pipe(through2.obj(function (file, _, cb) {
-        fs.writeFileSync('./src/html/bundles/property_item.html', html);
+        fs.writeFileSync('./public/bundles/property_item.html', html);
         cb()
     }))
 }
