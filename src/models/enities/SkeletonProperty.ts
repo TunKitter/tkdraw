@@ -4,7 +4,6 @@ class SkeletonProperty {
     private wrapper: HTMLElement;
     constructor() {
         this.wrapper = document.createElement('div');
-        this.wrapper.innerHTML = 'sdad1232'
         this.wrapper.classList.add(classes.base_skeleton_property);
     }
     render() {
@@ -20,7 +19,7 @@ class SkeletonProperty {
         this.wrapper.remove();
     }
     addItem(item: SkeletonPropertyItem) {
-        this.wrapper.appendChild(item.getElement());
+        this.wrapper.appendChild(item.getWrapper());
     }
 }
 export default SkeletonProperty

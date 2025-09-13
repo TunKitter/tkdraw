@@ -37,6 +37,7 @@ class Skeleton {
         };
         this.getELement().onkeydown = event => {
             if (event.key === 'Enter') {
+                if (event.shiftKey) return;
                 event.preventDefault();
                 this.getELement().setAttribute('contenteditable', 'false');
                 // G.moveable.target = null

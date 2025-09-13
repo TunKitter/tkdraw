@@ -13,4 +13,5 @@
     color: black;
     position: absolute;
     word-break: keep-all;
+    white-space: pre-wrap;
 }
