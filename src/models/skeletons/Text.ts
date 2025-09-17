@@ -3,21 +3,71 @@ import '../../css/skeleton/text.css'
 import SkeletonProperty from "../enities/SkeletonProperty";
 import createSkeletonFromToolbarAndProperty from "../../flow/createSkeletonFromToolbar";
 import SelectorPropertyItem from "../enities/property_items/Selector";
+import VariantPropertyItem from "../enities/property_items/Variant";
+import RangePropertyItem from "../enities/property_items/Range";
+import createColorPickerElement from "../base/picker";
+function handleCreateFont(prop: SkeletonProperty, text_: Skeleton) {
+    const item = new SelectorPropertyItem('Font', text_.getELement())
+    item.addOption('Times New Roman', 'times-new-roman')
+    item.addOption('Arial', 'arial')
+    item.addOption('Courier New', 'courier-new')
+    item.addOption('Georgia', 'georgia')
+    item.addOption('Verdana', 'verdana')
+    item.handleChange((value, referenceElement) => {
+        // @ts-ignore
+        referenceElement.style.fontFamily = value;
+    })
+    prop.addItem(item)
+}
+function handleCreateColor(prop: SkeletonProperty, text_: Skeleton) {
+    const div = document.createElement('div')
+    div.className = 'color_picker_item'
+    const item = new VariantPropertyItem('Color', div, ['background'], text_.getELement())
+    item.addVariant('black')
+    item.addVariant('white')
+    item.addVariant('#FFD93D')
+    item.addVariant('#E4004B')
+    item.addVariant('#33A1E0')
+    const picker = createColorPickerElement(value => {
+        text_.getELement().style.color = value
+    })
+    item.getElement().appendChild(picker)
+    item.handleChange((value, referenceElement) => item.getVariant().forEach(() => referenceElement.style.color = value.shift()))
+    prop.addItem(item)
+
+}
+function handleCreateBackground(prop: SkeletonProperty, text_: Skeleton) {
+    const div = document.createElement('div')
+    div.className = 'color_picker_item'
+    const item = new VariantPropertyItem('Background', div, ['background'], text_.getELement())
+    item.addVariant('black')
+    item.addVariant('white')
+    item.addVariant('#FFD93D')
+    item.addVariant('#E4004B')
+    item.addVariant('#33A1E0')
+    const picker = createColorPickerElement(value => {
+        text_.getELement().style.background = value
+    })
+    item.getElement().appendChild(picker)
+    item.handleChange((value, referenceElement) => item.getVariant().forEach((e, i) => referenceElement.style.background = value[i]))
+    prop.addItem(item)
+}
+function handleCreateOpacity(prop: SkeletonProperty, text_: Skeleton) {
+    const item = new RangePropertyItem('Opacity', 0, 100, text_.getELement())
+    item.setValue(100)
+    item.handleChange((value, referenceElement) => {
+        referenceElement.style.opacity = value + '%'
+    })
+    prop.addItem(item)
+}
 export default function createTextSkeletonAndPropertyFlow() {
     createSkeletonFromToolbarAndProperty(0, () => {
         const prop = new SkeletonProperty()
-        const text_ = createTextSkeleton('Hello')
-        const item = new SelectorPropertyItem('Font', text_.getELement())
-        item.addOption('Times New Roman', 'times-new-roman')
-        item.addOption('Arial', 'arial')
-        item.addOption('Courier New', 'courier-new')
-        item.addOption('Georgia', 'georgia')
-        item.addOption('Verdana', 'verdana')
-        item.handleChange((value, referenceElement) => {
-            // @ts-ignore
-            referenceElement.style.fontFamily = value;
-        })
-        prop.addItem(item)
+        const text_ = createTextSkeleton('Enter your text')
+        handleCreateFont(prop, text_)
+        handleCreateColor(prop, text_)
+        handleCreateBackground(prop, text_)
+        handleCreateOpacity(prop, text_)
         text_.doubleClickToEdit()
         return [text_, prop]
     })

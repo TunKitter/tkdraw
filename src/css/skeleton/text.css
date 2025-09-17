@@ -15,3 +15,12 @@
     word-break: keep-all;
     white-space: pre-wrap;
 }
+
+.color_picker_item {
+    margin: 5px;
+    padding: 0.5em;
+    border-radius: 50%;
+    width: 1.5em;
+    height: 1.5em;
+
+}
