@@ -6,6 +6,7 @@ import SelectorPropertyItem from "../enities/property_items/Selector";
 import VariantPropertyItem from "../enities/property_items/Variant";
 import RangePropertyItem from "../enities/property_items/Range";
 import createColorPickerElement from "../base/picker";
+import EditorPropertyItem from "../enities/property_items/Editor";
 function handleCreateFont(prop: SkeletonProperty, text_: Skeleton) {
     const item = new SelectorPropertyItem('Font', text_.getELement())
     item.addOption('Times New Roman', 'times-new-roman')
@@ -60,6 +61,19 @@ function handleCreateOpacity(prop: SkeletonProperty, text_: Skeleton) {
     })
     prop.addItem(item)
 }
+function handleCreateCustomCss(prop: SkeletonProperty, text_: Skeleton) {
+    const item = new EditorPropertyItem('Custom Css', text_.getELement())
+    let temp_styles = false as any
+    item.handleChange(function (value, referenceElement) {
+        const style = referenceElement.getAttribute('style')
+
+        if (temp_styles) referenceElement.setAttribute('style', style?.replace(new RegExp(temp_styles + '$'), '') + value)
+        else referenceElement.setAttribute('style', style + value)
+
+        temp_styles = value
+    })
+    prop.addItem(item)
+}
 export default function createTextSkeletonAndPropertyFlow() {
     createSkeletonFromToolbarAndProperty(0, () => {
         const prop = new SkeletonProperty()
@@ -68,6 +82,7 @@ export default function createTextSkeletonAndPropertyFlow() {
         handleCreateColor(prop, text_)
         handleCreateBackground(prop, text_)
         handleCreateOpacity(prop, text_)
+        handleCreateCustomCss(prop, text_)
         text_.doubleClickToEdit()
         return [text_, prop]
     })

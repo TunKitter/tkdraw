@@ -1,5 +1,5 @@
 import G from "../../global";
-
+import '../../css/module/skeleton_property_item/skeleton.css'
 class Skeleton {
     private html: HTMLElement;
     private wrapper?: HTMLElement;
