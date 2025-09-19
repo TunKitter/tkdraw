@@ -7,6 +7,7 @@ import VariantPropertyItem from "../enities/property_items/Variant";
 import RangePropertyItem from "../enities/property_items/Range";
 import createColorPickerElement from "../base/picker";
 import EditorPropertyItem from "../enities/property_items/Editor";
+import G from "../../global";
 function handleCreateFont(prop: SkeletonProperty, text_: Skeleton) {
     const item = new SelectorPropertyItem('Font', text_.getELement())
     item.addOption('Times New Roman', 'times-new-roman')
@@ -25,7 +26,12 @@ function handleCreateColor(prop: SkeletonProperty, text_: Skeleton) {
     div.className = 'color_picker_item'
     const item = new VariantPropertyItem('Color', div, ['background'], text_.getELement())
     item.addVariant('black')
-    item.addVariant('white')
+    const white_div = div.cloneNode(true)
+    Object.assign(white_div.style, {
+        background: 'white',
+        border: '2px solid black'
+    })
+    item.getElement().appendChild(white_div)
     item.addVariant('#FFD93D')
     item.addVariant('#E4004B')
     item.addVariant('#33A1E0')
@@ -42,7 +48,12 @@ function handleCreateBackground(prop: SkeletonProperty, text_: Skeleton) {
     div.className = 'color_picker_item'
     const item = new VariantPropertyItem('Background', div, ['background'], text_.getELement())
     item.addVariant('black')
-    item.addVariant('white')
+    const white_div = div.cloneNode(true)
+    Object.assign(white_div.style, {
+        background: 'white',
+        border: '2px solid black'
+    })
+    item.getElement().appendChild(white_div)
     item.addVariant('#FFD93D')
     item.addVariant('#E4004B')
     item.addVariant('#33A1E0')
@@ -65,16 +76,23 @@ function handleCreateCustomCss(prop: SkeletonProperty, text_: Skeleton) {
     const item = new EditorPropertyItem('Custom Css', text_.getELement())
     let temp_styles = false as any
     item.handleChange(function (value, referenceElement) {
-        const style = referenceElement.getAttribute('style')
-
-        if (temp_styles) referenceElement.setAttribute('style', style?.replace(new RegExp(temp_styles + '$'), '') + value)
+        const style = referenceElement.getAttribute('style')?.replaceAll(' ', '')
+        if (temp_styles !== false) referenceElement.setAttribute('style', style?.replace(new RegExp(temp_styles + ';?$'), '') + ';' + value)
         else referenceElement.setAttribute('style', style + value)
-
         temp_styles = value
     })
     prop.addItem(item)
 }
+function handleBehaviorMoveableTextSkeleton() {
+    G.moveable.on('click', e => {
+        const isTextSkeleton = e.target.classList.contains('text_skeleton');
+        G.moveable.resizable = !isTextSkeleton;
+        G.moveable.scalable = isTextSkeleton;
+        G.moveable.keepRatio = isTextSkeleton;
+    })
+}
 export default function createTextSkeletonAndPropertyFlow() {
+    handleBehaviorMoveableTextSkeleton()
     createSkeletonFromToolbarAndProperty(0, () => {
         const prop = new SkeletonProperty()
         const text_ = createTextSkeleton('Enter your text')

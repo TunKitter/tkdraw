@@ -30,12 +30,7 @@ export function initMoveable() {
     G.moveable.on("scale", e => {
         e.target.style.transform = e.afterTransform
     });
-    G.moveable.on('click', e => {
-        const isTextSkeleton = e.target.classList.contains('text_skeleton');
-        G.moveable.resizable = !isTextSkeleton;
-        G.moveable.scalable = isTextSkeleton;
-        G.moveable.keepRatio = isTextSkeleton;
-    })
+
 
     // G.moveable.on("round", (e) => {
     // e.target.style.borderRadius = e.borderRadius;
