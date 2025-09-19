@@ -8,6 +8,12 @@ import RangePropertyItem from "../enities/property_items/Range";
 import createColorPickerElement from "../base/picker";
 import EditorPropertyItem from "../enities/property_items/Editor";
 import G from "../../global";
+function createTextSkeleton(text: string, wrapper: HTMLElement = document.querySelector('.container')!) {
+    const html = document.createElement('div');
+    html.classList.add('text_skeleton', 'skeleton');
+    html.innerText = text;
+    return new Skeleton(html, wrapper);
+}
 function handleCreateFont(prop: SkeletonProperty, text_: Skeleton) {
     const item = new SelectorPropertyItem('Font', text_.getELement())
     item.addOption('Times New Roman', 'times-new-roman')
@@ -104,10 +110,4 @@ export default function createTextSkeletonAndPropertyFlow() {
         text_.doubleClickToEdit()
         return [text_, prop]
     })
-}
-function createTextSkeleton(text: string, wrapper: HTMLElement = document.querySelector('.container')!) {
-    const html = document.createElement('div');
-    html.classList.add('text_skeleton', 'skeleton');
-    html.innerText = text;
-    return new Skeleton(html, wrapper);
 }

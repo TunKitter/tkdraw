@@ -23,7 +23,7 @@ class VariantPropertyItem extends SkeletonPropertyItem {
         this.getElement().appendChild(cloneNode)
     }
     handleChange(callback: (value: any, referenceElement: HTMLElement) => void): void {
-        this.getElement().childNodes.forEach(e => {
+        this.getElement().childNodes.forEach(() => {
             this.getElement().childNodes.forEach(e => {
                 // @ts-ignore
                 e.onclick = () => {
