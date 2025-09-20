@@ -8,6 +8,7 @@ import RangePropertyItem from "../enities/property_items/Range";
 import createColorPickerElement from "../base/picker";
 import EditorPropertyItem from "../enities/property_items/Editor";
 import G from "../../global";
+import { getRandomString } from "../../utilities";
 function createTextSkeleton(text: string, wrapper: HTMLElement = document.querySelector('.container')!) {
     const html = document.createElement('div');
     html.classList.add('text_skeleton', 'skeleton');
@@ -80,12 +81,25 @@ function handleCreateOpacity(prop: SkeletonProperty, text_: Skeleton) {
 }
 function handleCreateCustomCss(prop: SkeletonProperty, text_: Skeleton) {
     const item = new EditorPropertyItem('Custom Css', text_.getELement())
-    let temp_styles = false as any
-    item.handleChange(function (value, referenceElement) {
-        const style = referenceElement.getAttribute('style')?.replaceAll(' ', '')
-        if (temp_styles !== false) referenceElement.setAttribute('style', style?.replace(new RegExp(temp_styles + ';?$'), '') + ';' + value)
-        else referenceElement.setAttribute('style', style + value)
-        temp_styles = value
+    const description = document.createElement('p')
+    description.innerHTML = "Add <span style='color: #ff73ea;font-size: 1em;'>!important</span> to the end of your css property to make it override above properties.";
+    Object.assign(description.style, {
+        color: 'gray',
+        fontSize: '0.8em'
+    })
+    item.getWrapper().querySelector('h1')!.insertAdjacentElement('afterend', description)
+    let temp_styles = document.createElement('style');
+    const className = getRandomString()
+    text_.getELement().classList.add(className)
+    item.handleChange(function (value) {
+        value = `div.${className}.text_skeleton.skeleton {${value}}`
+        temp_styles.remove()
+        const style = document.createElement('style');
+        style.type = 'text/css';
+        if (style.styleSheet) style.styleSheet.cssText = value;
+        else style.appendChild(document.createTextNode(value));
+        document.head.appendChild(style);
+        temp_styles = style
     })
     prop.addItem(item)
 }
