@@ -1,0 +1,9 @@
+.shape_skeleton {
+    background: black;
+}
+
+.select_selection_shape {
+    background: transparent !important;
+    border: 2px dashed #ff73ea !important;
+    outline: none !important;
+}

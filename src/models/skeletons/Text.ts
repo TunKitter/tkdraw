@@ -1,5 +1,5 @@
 import Skeleton from "../enities/Skeleton";
-import '../../css/skeleton/text.css'
+import '../../css/skeleton/skeleton.css'
 import SkeletonProperty from "../enities/SkeletonProperty";
 import createSkeletonFromToolbarAndProperty from "../../flow/createSkeletonFromToolbar";
 import SelectorPropertyItem from "../enities/property_items/Selector";
@@ -9,8 +9,9 @@ import createColorPickerElement from "../base/picker";
 import EditorPropertyItem from "../enities/property_items/Editor";
 import G from "../../global";
 import { getRandomString } from "../../utilities";
+import { setResizeable } from "../enities/Moveable";
 function createTextSkeleton(text: string, wrapper: HTMLElement = document.querySelector('.container')!) {
-    const html = document.createElement('div');
+    const html = document.createElement('span');
     html.classList.add('text_skeleton', 'skeleton');
     html.innerText = text;
     return new Skeleton(html, wrapper);
@@ -50,7 +51,7 @@ function handleCreateColor(prop: SkeletonProperty, text_: Skeleton) {
     prop.addItem(item)
 
 }
-function handleCreateBackground(prop: SkeletonProperty, text_: Skeleton) {
+export function handleCreateBackground(prop: SkeletonProperty, text_: Skeleton) {
     const div = document.createElement('div')
     div.className = 'color_picker_item'
     const item = new VariantPropertyItem('Background', div, ['background'], text_.getELement())
@@ -71,7 +72,7 @@ function handleCreateBackground(prop: SkeletonProperty, text_: Skeleton) {
     item.handleChange((value, referenceElement) => item.getVariant().forEach((e, i) => referenceElement.style.background = value[i]))
     prop.addItem(item)
 }
-function handleCreateOpacity(prop: SkeletonProperty, text_: Skeleton) {
+export function handleCreateOpacity(prop: SkeletonProperty, text_: Skeleton) {
     const item = new RangePropertyItem('Opacity', 0, 100, text_.getELement())
     item.setValue(100)
     item.handleChange((value, referenceElement) => {
@@ -79,7 +80,7 @@ function handleCreateOpacity(prop: SkeletonProperty, text_: Skeleton) {
     })
     prop.addItem(item)
 }
-function handleCreateCustomCss(prop: SkeletonProperty, text_: Skeleton) {
+export function handleCreateCustomCss(prop: SkeletonProperty, text_: Skeleton) {
     const item = new EditorPropertyItem('Custom Css', text_.getELement())
     const description = document.createElement('p')
     description.innerHTML = "Add <span style='color: #ff73ea;font-size: 1em;'>!important</span> to the end of your css property to make it override above properties.";
@@ -92,7 +93,7 @@ function handleCreateCustomCss(prop: SkeletonProperty, text_: Skeleton) {
     const className = getRandomString()
     text_.getELement().classList.add(className)
     item.handleChange(function (value) {
-        value = `div.${className}.text_skeleton.skeleton {${value}}`
+        value = `div.${className}.skeleton {${value}}`
         temp_styles.remove()
         const style = document.createElement('style');
         style.type = 'text/css';
@@ -104,12 +105,7 @@ function handleCreateCustomCss(prop: SkeletonProperty, text_: Skeleton) {
     prop.addItem(item)
 }
 function handleBehaviorMoveableTextSkeleton() {
-    G.moveable.on('click', e => {
-        const isTextSkeleton = e.target.classList.contains('text_skeleton');
-        G.moveable.resizable = !isTextSkeleton;
-        G.moveable.scalable = isTextSkeleton;
-        G.moveable.keepRatio = isTextSkeleton;
-    })
+    G.moveable.on('click', e => e.target.classList.contains('text_skeleton') && setResizeable())
 }
 export default function createTextSkeletonAndPropertyFlow() {
     handleBehaviorMoveableTextSkeleton()

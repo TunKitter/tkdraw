@@ -59,3 +59,13 @@ export function initMoveable() {
         });
     });
 }
+export function setResizeable() {
+    G.moveable.resizable = true
+    G.moveable.scalable = false
+    G.moveable.keepRatio = false
+}
+export function setScalable() {
+    G.moveable.resizable = false
+    G.moveable.scalable = true
+    G.moveable.keepRatio = true
+}

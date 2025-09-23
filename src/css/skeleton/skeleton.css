@@ -1,0 +1,15 @@
+.skeleton {
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+    color: black;
+    word-break: break-all;
+    white-space: pre-wrap;
+    outline: none;
+}

@@ -5,6 +5,7 @@ import { initInfiniteView } from './models/enities/InfiniteView';
 import { initToolbar } from './models/Toolbar';
 import { initBody, initSkeletonProperty } from './general';
 import createTextSkeletonAndPropertyFlow from './models/skeletons/Text';
+import createShapeSkeletonAndPropertyFlow from './models/skeletons/Shape';
 
 (async () => {
     initBody()
@@ -14,4 +15,5 @@ import createTextSkeletonAndPropertyFlow from './models/skeletons/Text';
     initToolbar()
     await initSkeletonProperty()
     createTextSkeletonAndPropertyFlow()
+    createShapeSkeletonAndPropertyFlow()
 })()

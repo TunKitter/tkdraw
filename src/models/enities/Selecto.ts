@@ -27,3 +27,6 @@ export function initSelecto() {
         G.moveable.target = e.selected;
     });
 }
+export function getSelectionElement() {
+    return document.querySelector('.selecto-selection')
+}

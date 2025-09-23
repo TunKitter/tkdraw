@@ -29,7 +29,6 @@ export default class Toolbar {
 export function initToolbar() {
     const toolbar = Toolbar.getInstance();
     toolbar.add('Text');
-    toolbar.add('Image');
     toolbar.add('Shape');
     toolbar.add('Shape');
     toolbar.add('Shape');
