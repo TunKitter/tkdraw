@@ -13,7 +13,7 @@ class VariantPropertyItem extends SkeletonPropertyItem {
     getVariant() {
         return this.styles
     }
-    addVariant(...ds: string[]): void {
+    addVariant(...ds: string[]) {
         if (ds.length != this.styles.length) throw new Error('The number of styles not the same')
         const cloneNode = this.variantElement.cloneNode(true)
         this.styles.forEach(e => {
@@ -21,6 +21,7 @@ class VariantPropertyItem extends SkeletonPropertyItem {
             cloneNode.style[e] = ds.shift()
         });
         this.getElement().appendChild(cloneNode)
+        return cloneNode
     }
     handleChange(callback: (value: any, referenceElement: HTMLElement) => void): void {
         this.getElement().childNodes.forEach(() => {

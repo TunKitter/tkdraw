@@ -104,6 +104,40 @@ export function handleCreateCustomCss(prop: SkeletonProperty, text_: Skeleton) {
     })
     prop.addItem(item)
 }
+export function handleCreateLayer(prop: SkeletonProperty, text_: Skeleton) {
+    const div = document.createElement('div')
+    Object.assign(div.style, {
+        width: '1.4em',
+        height: '1.4em',
+        margin: '5px',
+        borderRadius: '4px',
+        background: 'black'
+    })
+    const item = new VariantPropertyItem('Layer', div, ['box-shadow', 'zindex'], text_.getELement())
+    item.addVariant('2px 2px #ff73ea', 'min')
+    item.addVariant('4px 4px #ff73ea', '-1')
+    item.addVariant('3px 3px black', '1').style.background = '#ff73ea'
+    item.addVariant('3px 5px black', 'max').style.background = '#ff73ea'
+
+    item.handleChange((value, referenceElement) => {
+        let zIndex = 0
+        switch (value[1]) {
+            case 'min':
+                zIndex = --G.min_z_index;
+                break;
+            case 'max':
+                zIndex = ++G.max_z_index;
+                break;
+            default:
+                zIndex = (parseInt(referenceElement.style.zIndex) || 0) + parseInt(value[1] || 0);
+                break;
+        }
+        if (zIndex > G.max_z_index) G.max_z_index = ++zIndex
+        else if (zIndex < G.min_z_index) G.min_z_index = --zIndex
+        referenceElement.style.zIndex = zIndex
+    })
+    prop.addItem(item)
+}
 function handleBehaviorMoveableTextSkeleton() {
     G.moveable.on('click', e => e.target.classList.contains('text_skeleton') && setResizeable())
 }
@@ -115,6 +149,7 @@ export default function createTextSkeletonAndPropertyFlow() {
         handleCreateFont(prop, text_)
         handleCreateColor(prop, text_)
         handleCreateBackground(prop, text_)
+        handleCreateLayer(prop, text_)
         handleCreateOpacity(prop, text_)
         handleCreateCustomCss(prop, text_)
         text_.doubleClickToEdit()
