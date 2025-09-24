@@ -2,7 +2,7 @@ import '../../css/skeleton/skeleton.css'
 import '../../css/skeleton/shape.css'
 import Skeleton from "../enities/Skeleton";
 import SkeletonProperty from "../enities/SkeletonProperty";
-import { handleCreateBackground, handleCreateCustomCss, handleCreateOpacity } from "./Text";
+import { handleCreateBackground, handleCreateCustomCss, handleCreateLayer, handleCreateOpacity } from "./Text";
 import VariantPropertyItem from "../enities/property_items/Variant";
 import { getSelectionElement } from "../enities/Selecto";
 import G from "../../global";
@@ -67,6 +67,7 @@ export default function createShapeSkeletonAndPropertyFlow() {
             const text_ = div
             handleCreateShape(prop, text_)
             handleCreateBackground(prop, text_)
+            handleCreateLayer(prop, text_)
             handleCreateOpacity(prop, text_)
             handleCreateCustomCss(prop, text_)
             G.selecto.off('selectEnd', handleGenerateShape)
