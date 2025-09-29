@@ -5,13 +5,20 @@ import css from '@eslint/css';
 import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
-  { files: ['**/*.{js,ts}'], plugins: { js }, extends: ['js/recommended'], languageOptions: { globals: globals.browser } },
+  {
+    files: ['**/*.{js,ts}'],
+    plugins: { js },
+    extends: ['js/recommended'],
+    languageOptions: { globals: globals.browser }
+  },
   { files: ['**/*.js'], languageOptions: { sourceType: 'script' } },
   tseslint.configs.recommended,
   {
-    files: ['**/*.css'], plugins: { css }, language: 'css/css', extends: ['css/recommended'], rules: {
-      'css/use-baseline': 'off',
-    },
+    files: ['**/*.css'],
+    plugins: { css },
+    language: 'css/css',
+    extends: ['css/recommended'],
+    rules: { 'css/use-baseline': 'off' }
   },
   {
     rules: {
@@ -29,7 +36,8 @@ export default defineConfig([
       '@typescript-eslint/no-unused-expressions': 'off',
       'no-irregular-whitespace': 'error',
       'no-unexpected-multiline': 'error',
-      'curly': ['error', 'multi'], 'no-extend-native': 'error',
+      'curly': ['error', 'multi'],
+      'no-extend-native': 'error',
       'no-extra-bind': 'error',
       'no-invalid-this': 'error',
       'no-multi-spaces': 'error',
@@ -61,23 +69,17 @@ export default defineConfig([
       'no-new-object': 'error',
       'no-tabs': 'error',
       'no-trailing-spaces': 'error',
-      'one-var': ['error', {
-        var: 'never',
-        let: 'never',
-        const: 'never',
-      }],
+      'one-var': ['error', { var: 'never', let: 'never', const: 'never' }],
       'operator-linebreak': ['error', 'after'],
       'padded-blocks': ['error', 'never'],
       'quote-props': ['error', 'consistent'],
       'quotes': ['error', 'single', { allowTemplateLiterals: true }],
-      'semi': 'error',
       'semi-spacing': 'error',
       'space-before-blocks': 'error',
-      'space-before-function-paren': ['error', {
-        asyncArrow: 'always',
-        anonymous: 'never',
-        named: 'never',
-      }],
+      'space-before-function-paren': [
+        'error',
+        { asyncArrow: 'always', anonymous: 'never', named: 'never' }
+      ],
       'spaced-comment': ['error', 'always'],
       'switch-colon-spacing': 'error',
       'arrow-parens': ['error', 'as-needed'],
@@ -88,7 +90,7 @@ export default defineConfig([
       'prefer-rest-params': 'error',
       'prefer-spread': 'error',
       'rest-spread-spacing': 'error',
-      'yield-star-spacing': ['error', 'after'],
-    },
-  },
+      'yield-star-spacing': ['error', 'after']
+    }
+  }
 ]);

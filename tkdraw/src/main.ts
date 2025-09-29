@@ -1,5 +1,4 @@
 import { initContainer } from './bootstrap';
-
-(async function() {
+(async function () {
   initContainer();
 })();
