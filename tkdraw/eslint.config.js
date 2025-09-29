@@ -3,15 +3,15 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 import css from '@eslint/css';
 import { defineConfig } from 'eslint/config';
-
+import eslintConfigPrettier from "eslint-config-prettier/flat";
 export default defineConfig([
   {
-    files: ['**/*.{js,ts}'],
+    files: ['src/*.{js,ts}'],
     plugins: { js },
-    extends: ['js/recommended'],
+    extends: ['js/recommended', eslintConfigPrettier],
     languageOptions: { globals: globals.browser }
   },
-  { files: ['**/*.js'], languageOptions: { sourceType: 'script' } },
+  { files: ['src/*.js'], languageOptions: { sourceType: 'script' } },
   tseslint.configs.recommended,
   {
     files: ['**/*.css'],
@@ -21,6 +21,7 @@ export default defineConfig([
     rules: { 'css/use-baseline': 'off' }
   },
   {
+    files: ['src/*.{js,ts}'],
     rules: {
       'no-console': 'warn',
       'no-debugger': 'error',
@@ -76,10 +77,6 @@ export default defineConfig([
       'quotes': ['error', 'single', { allowTemplateLiterals: true }],
       'semi-spacing': 'error',
       'space-before-blocks': 'error',
-      'space-before-function-paren': [
-        'error',
-        { asyncArrow: 'always', anonymous: 'never', named: 'never' }
-      ],
       'spaced-comment': ['error', 'always'],
       'switch-colon-spacing': 'error',
       'arrow-parens': ['error', 'as-needed'],
