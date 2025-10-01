@@ -1,0 +1,31 @@
+#toolbar {
+  position: fixed;
+  top: 2%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  border: 2px solid black;
+  border-radius: 12px;
+  width: 50%;
+  background-color: #ff73ea;
+  border-bottom: 0.34em solid black;
+  overflow: hidden;
+}
+#toolbar button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 10px 1em;
+  width: 100%;
+  font-size: 1em;
+}
+
+#toolbar button:hover {
+  background-color: white;
+  color: black;
+}
+
+#toolbar button.btn-selected {
+  background-color: black;
+  color: white;
+}

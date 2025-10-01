@@ -1,0 +1,20 @@
+* {
+    font-family: 'Comic Sans MS', cursive;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+
+#app {
+    /* position: relative; */
+    /* width: 100vw; */
+    /* height: 100vh; */
+    /* overflow: hidden; */
+    /* background: blue; */
+}
