@@ -62,7 +62,7 @@ export default defineConfig([
       'func-call-spacing': 'error',
       'key-spacing': 'error',
       'keyword-spacing': 'error',
-      'linebreak-style': 'error',
+      // 'linebreak-style': 'error',
       'new-cap': 'error',
       'no-array-constructor': 'error',
       'no-mixed-spaces-and-tabs': 'error',

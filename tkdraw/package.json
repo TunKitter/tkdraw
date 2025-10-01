@@ -9,12 +9,15 @@
     "preview": "vite preview",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "bundle:html": "gulp"
   },
   "devDependencies": {
     "eslint": "^9.36.0",
     "eslint-config-prettier": "^10.1.8",
+    "gulp": "^5.0.1",
     "prettier": "3.6.2",
+    "through2": "^4.0.2",
     "typescript": "~5.8.3",
     "vite": "^7.1.7"
   }

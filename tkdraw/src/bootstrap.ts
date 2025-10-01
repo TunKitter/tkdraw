@@ -1,5 +1,12 @@
+import G from './global';
+
 export function initContainer() {
   document.body.addEventListener('contextmenu', e => e.preventDefault());
+}
+export function initHTML() {
+  return fetch('bundles.html')
+    .then(res => res.text())
+    .then(html => (G.html.innerHTML = html));
 }
 // export function initCircleMouse() {
 //   const circle = document.createElement('div');
