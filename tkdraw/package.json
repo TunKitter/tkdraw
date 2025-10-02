@@ -1,7 +1,7 @@
 {
   "name": "tkdraw",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -20,5 +20,10 @@
     "through2": "^4.0.2",
     "typescript": "~5.8.3",
     "vite": "^7.1.7"
+  },
+  "dependencies": {
+    "infinite-viewer": "^0.29.1",
+    "moveable": "^0.53.0",
+    "selecto": "^1.26.3"
   }
 }
