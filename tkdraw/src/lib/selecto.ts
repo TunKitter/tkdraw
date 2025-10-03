@@ -3,7 +3,7 @@ import G from '../global';
 
 export function initSelecto() {
   G.selecto = new Selecto({
-    dragContainer: document.querySelector(`#app`),
+    dragContainer: G.app_element,
     selectableTargets: ['.skeleton'],
     // hitRate: 0,
     selectByClick: true,

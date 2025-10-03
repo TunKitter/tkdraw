@@ -1,7 +1,7 @@
 import Moveable from 'moveable';
 import G from '../global';
 export function initMoveable() {
-  G.moveable = new Moveable(document.querySelector('#wrapper')!, {
+  G.moveable = new Moveable(G.wrapper_element, {
     // scalable: true,
     draggable: true,
     resizable: true,

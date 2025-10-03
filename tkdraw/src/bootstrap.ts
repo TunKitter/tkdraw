@@ -8,6 +8,12 @@ export function initHTML() {
     .then(res => res.text())
     .then(html => (G.html.innerHTML = html));
 }
+export function initWrapperAndAppElement() {
+  G.app_element = document.querySelector('#app')!;
+  G.wrapper_element = document.querySelector('#wrapper')!;
+  if (!G.app_element || !G.wrapper_element)
+    throw new Error('app_element or wrapper_element not found');
+}
 // export function initCircleMouse() {
 //   const circle = document.createElement('div');
 //   Object.assign(circle.style, {
