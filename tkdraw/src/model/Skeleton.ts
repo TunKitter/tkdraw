@@ -17,3 +17,13 @@ class Skeleton {
   }
 }
 export default Skeleton;
+
+export function handleRemoveSkeletonByDeleteKey() {
+  document.body.addEventListener('keyup', e => {
+    const targets = G.selecto.getSelectedTargets();
+    if (e.key == 'Delete' && targets.length > 0) {
+      G.moveable.target = null;
+      targets.map(e => e.remove());
+    }
+  });
+}

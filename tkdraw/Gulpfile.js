@@ -3,7 +3,7 @@ import through2 from 'through2';
 import fs from 'fs';
 function mergePropertyItem() {
   let html = '';
-  return src('./src/html/*.html')
+  return src('./src/html/**/*.html')
     .pipe(
       through2.obj(function (file, _, cb) {
         html += file.contents.toString();

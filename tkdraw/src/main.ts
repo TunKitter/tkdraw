@@ -2,6 +2,8 @@ import { initContainer, initHTML, initWrapperAndAppElement } from './bootstrap';
 import { initInfiniteView } from './lib/infinite_viewer';
 import { initMoveable } from './lib/moveable';
 import { initSelecto } from './lib/selecto';
+import { handleRemoveSkeletonByDeleteKey } from './model/Skeleton';
+import createTextSkeletonAndPropertyFlow from './skeleton/Text';
 import { initToolbar } from './toolbar';
 (async function () {
   initWrapperAndAppElement();
@@ -11,4 +13,6 @@ import { initToolbar } from './toolbar';
   initMoveable();
   initSelecto();
   initInfiniteView();
+  handleRemoveSkeletonByDeleteKey();
+  createTextSkeletonAndPropertyFlow();
 })();

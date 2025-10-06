@@ -1,0 +1,6 @@
+.text_skeleton {
+    width: max-content;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}

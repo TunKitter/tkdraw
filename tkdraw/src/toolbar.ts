@@ -4,7 +4,7 @@ export default class Toolbar {
   private constructor() {
     const element = document.createElement('div');
     element.id = 'toolbar';
-    element.className = 'center';
+    element.className = 'center non_selectable';
     this.element = element;
   }
   public static getInstance(): Toolbar {
