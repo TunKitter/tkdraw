@@ -1,10 +1,15 @@
-import createSkeletonFromToolbarAndProperty from '../flow/CreateSkeletonAndPropertyFromToolbarFlow';
+import toggleShowPropertyPanelWithSkeleton from '../flow/toggleShowPropertyPanelWithSkeleton';
 import G from '../global';
 import { setScalable } from '../lib/moveable';
 import Skeleton from '../model/Skeleton';
 import SkeletonProperty from '../model/SkeletonProperty';
 import SelectorPropertyItem from '../property_items/select';
-import { doubleClickToEdit, setPositionAtCursor } from '../utility';
+import Toolbar, { _toolbar } from '../toolbar';
+import {
+  doubleClickToEdit,
+  listenerToggle,
+  setPositionAtCursor
+} from '../utility';
 
 function handleCreateFont(prop: SkeletonProperty, text_: Skeleton) {
   const item = new SelectorPropertyItem('Font', text_);
@@ -174,25 +179,28 @@ function generateTextSkeletonAndItsProperty() {
 
 export default function createTextSkeletonAndPropertyFlow() {
   handleBehaviorMoveableTextSkeleton();
-  createSkeletonFromToolbarAndProperty(
-    0,
-    generateTextSkeletonAndItsProperty,
-    function (skeleton, prop, callback) {
-      G.app_element.addEventListener(
-        'click',
-        function (e) {
+  Toolbar.getInstance()
+    .getChildAt(0)
+    .addEventListener('click', function (toobar_btn) {
+      const listener = listenerToggle(
+        G.app_element,
+        function (e: PointerEvent) {
+          const [skeleton, prop] = generateTextSkeletonAndItsProperty();
           skeleton.render();
           prop.render();
           setPositionAtCursor(skeleton.getELement(), e);
           doubleClickToEdit(skeleton.getELement());
-          // console.log(G.moveable.target);
-          callback();
+          G.moveable.target = skeleton.getELement();
           setScalable();
+          toggleShowPropertyPanelWithSkeleton(skeleton, prop);
+          //@ts-ignore
+          toobar_btn.target.classList.remove('btn-selected');
         },
-        { once: true }
+        true
       );
-    }
-  );
+      listener[0]();
+      _toolbar.removeListener = listener[1];
+    });
   //   createSkeletonFromToolbarAndProperty(0, () => {
   //     const prop = new SkeletonProperty();
   //     const text_ = createTextSkeleton('Enter your text');

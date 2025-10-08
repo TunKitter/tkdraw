@@ -22,6 +22,13 @@ export default class Toolbar {
   getChildAt(index: number) {
     return this.element.children[index] as HTMLElement;
   }
+  getSelectedChild() {
+    return this.element.querySelector('.btn-selected');
+  }
+  cancelSelectedChild() {
+    const btn_selected = this.element.querySelector('btn-selected');
+    btn_selected && btn_selected.classList.remove('btn-selected');
+  }
 }
 
 export function initToolbar() {
@@ -32,5 +39,20 @@ export function initToolbar() {
   toolbar.add('Shape');
   toolbar.add('Shape');
   toolbar.add('Shape');
+  toolbar
+    .getElement()
+    .querySelectorAll('button')
+    .forEach(e => {
+      e.addEventListener('click', ee => {
+        const btn_selected = toolbar.getSelectedChild();
+        if (btn_selected) {
+          _toolbar.removeListener();
+          btn_selected && btn_selected.classList.remove('btn-selected');
+          btn_selected && ee.stopImmediatePropagation();
+        }
+        if (btn_selected !== e) e.classList.add('btn-selected');
+      });
+    });
   document.body.appendChild(toolbar.getElement());
 }
+export const _toolbar = { removeListener: () => {} };

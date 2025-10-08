@@ -56,3 +56,18 @@ export function doubleClickToEdit(element: HTMLElement) {
     }
   };
 }
+
+export function listenerToggle(
+  element: HTMLElement,
+  callback: (e: any) => void,
+  is_once: boolean = false
+) {
+  return [
+    () => {
+      element.addEventListener('click', callback, { once: is_once });
+    },
+    () => {
+      element.removeEventListener('click', callback);
+    }
+  ];
+}
