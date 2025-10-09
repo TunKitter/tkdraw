@@ -1,4 +1,4 @@
-import toggleShowPropertyPanelWithSkeleton from '../flow/toggleShowPropertyPanelWithSkeleton';
+import toggleShowPropertyPanelWithSkeleton from '../flow/ToggleShowPropertyPanelWithSkeleton';
 import G from '../global';
 import { setScalable } from '../lib/moveable';
 import Skeleton from '../model/Skeleton';
