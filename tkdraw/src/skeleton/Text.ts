@@ -65,39 +65,31 @@ function handleCreateColor(prop: SkeletonProperty, text_: Skeleton) {
   });
   prop.addItem(item);
 }
-// export function handleCreateBackground(
-//   prop: SkeletonProperty,
-//   text_: Skeleton
-// ) {
-//   const div = document.createElement('div');
-//   div.className = 'color_picker_item';
-//   const item = new VariantPropertyItem(
-//     'Background',
-//     div,
-//     ['background'],
-//     text_.getELement()
-//   );
-//   item.addVariant('black');
-//   const white_div = div.cloneNode(true);
-//   Object.assign(white_div.style, {
-//     background: 'white',
-//     border: '2px solid black'
-//   });
-//   item.getElement().appendChild(white_div);
-//   item.addVariant('#FFD93D');
-//   item.addVariant('#E4004B');
-//   item.addVariant('#33A1E0');
-//   const picker = createColorPickerElement(value => {
-//     text_.getELement().style.background = value;
-//   });
-//   item.getElement().appendChild(picker);
-//   item.handleChange((value, referenceElement) =>
-//     item
-//       .getVariant()
-//       .forEach((e, i) => (referenceElement.style.background = value[i]))
-//   );
-//   prop.addItem(item);
-// }
+export function handleCreateBackground(
+  prop: SkeletonProperty,
+  text_: Skeleton
+) {
+  const div = document.createElement('div');
+  Object.assign(div.style, {
+    width: '2em',
+    height: '2em',
+    borderRadius: '50%'
+  });
+  const item = new VariantPropertyItem('Background', div, text_);
+  item.addVariant({ background: 'white', border: '2px solid black' }, 'white');
+  item.addVariant({ background: 'black' }, 'black');
+  item.addVariant({ background: '#FFD93D' }, '#FFD93D');
+  item.addVariant({ background: '#E4004B' }, '#E4004B');
+  item.addVariant({ background: '#33A1E0' }, '#33A1E0');
+  const picker = createColorPickerElement(value => {
+    text_.getELement().style.backgroundColor = value;
+  });
+  item.getElement().appendChild(picker);
+  item.handleChange((value, referenceElement) => {
+    referenceElement.getELement().style.backgroundColor = value;
+  });
+  prop.addItem(item);
+}
 // export function handleCreateOpacity(prop: SkeletonProperty, text_: Skeleton) {
 //   const item = new RangePropertyItem('Opacity', 0, 100, text_.getELement());
 //   item.setValue(100);
@@ -186,6 +178,7 @@ function generateTextSkeletonAndItsProperty() {
   const prop = new SkeletonProperty();
   handleCreateFont(prop, skeleton);
   handleCreateColor(prop, skeleton);
+  handleCreateBackground(prop, skeleton);
   return [skeleton, prop] as [Skeleton, SkeletonProperty];
 }
 
