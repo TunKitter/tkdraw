@@ -20,10 +20,11 @@ export default Skeleton;
 
 export function handleRemoveSkeletonByDeleteKey() {
   document.body.addEventListener('keyup', e => {
-    const targets = G.selecto.getSelectedTargets();
+    let targets = G.moveable.getTargets();
     if (e.key == 'Delete' && targets.length > 0) {
       G.moveable.target = null;
       targets.map(e => e.remove());
+      document.querySelector('.skeleton_property')?.remove();
     }
   });
 }

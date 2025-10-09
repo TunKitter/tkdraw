@@ -4,12 +4,31 @@ import { setScalable } from '../lib/moveable';
 import Skeleton from '../model/Skeleton';
 import SkeletonProperty from '../model/SkeletonProperty';
 import SelectorPropertyItem from '../property_items/select';
+import VariantPropertyItem from '../property_items/variant';
 import Toolbar, { _toolbar } from '../toolbar';
 import {
   doubleClickToEdit,
   listenerToggle,
   setPositionAtCursor
 } from '../utility';
+
+function createColorPickerElement(
+  callback: (value: string) => void
+): HTMLInputElement {
+  const picker = document.createElement('input');
+  picker.type = 'color';
+  Object.assign(picker.style, {
+    border: 'none',
+    background: 'transparent',
+    width: '2em',
+    height: '2em',
+    transform: 'translateX(0.5em)'
+  });
+
+  // @ts-ignore
+  picker.addEventListener('input', e => callback(e.target!.value));
+  return picker;
+}
 
 function handleCreateFont(prop: SkeletonProperty, text_: Skeleton) {
   const item = new SelectorPropertyItem('Font', text_);
@@ -24,36 +43,28 @@ function handleCreateFont(prop: SkeletonProperty, text_: Skeleton) {
   });
   prop.addItem(item);
 }
-// function handleCreateColor(prop: SkeletonProperty, text_: Skeleton) {
-//   const div = document.createElement('div');
-//   div.className = 'color_picker_item';
-//   const item = new VariantPropertyItem(
-//     'Color',
-//     div,
-//     ['background'],
-//     text_.getELement()
-//   );
-//   item.addVariant('black');
-//   const white_div = div.cloneNode(true);
-//   Object.assign(white_div.style, {
-//     background: 'white',
-//     border: '2px solid black'
-//   });
-//   item.getElement().appendChild(white_div);
-//   item.addVariant('#FFD93D');
-//   item.addVariant('#E4004B');
-//   item.addVariant('#33A1E0');
-//   const picker = createColorPickerElement(value => {
-//     text_.getELement().style.color = value;
-//   });
-//   item.getElement().appendChild(picker);
-//   item.handleChange((value, referenceElement) =>
-//     item
-//       .getVariant()
-//       .forEach(() => (referenceElement.style.color = value.shift()))
-//   );
-//   prop.addItem(item);
-// }
+function handleCreateColor(prop: SkeletonProperty, text_: Skeleton) {
+  const div = document.createElement('div');
+  Object.assign(div.style, {
+    width: '2em',
+    height: '2em',
+    borderRadius: '50%'
+  });
+  const item = new VariantPropertyItem('Color', div, text_);
+  item.addVariant({ background: 'white', border: '2px solid black' }, 'white');
+  item.addVariant({ background: 'black' }, 'black');
+  item.addVariant({ background: '#FFD93D' }, '#FFD93D');
+  item.addVariant({ background: '#E4004B' }, '#E4004B');
+  item.addVariant({ background: '#33A1E0' }, '#33A1E0');
+  const picker = createColorPickerElement(value => {
+    text_.getELement().style.color = value;
+  });
+  item.getElement().appendChild(picker);
+  item.handleChange((value, referenceElement) => {
+    referenceElement.getELement().style.color = value;
+  });
+  prop.addItem(item);
+}
 // export function handleCreateBackground(
 //   prop: SkeletonProperty,
 //   text_: Skeleton
@@ -174,6 +185,7 @@ function generateTextSkeletonAndItsProperty() {
   const skeleton = new Skeleton(text);
   const prop = new SkeletonProperty();
   handleCreateFont(prop, skeleton);
+  handleCreateColor(prop, skeleton);
   return [skeleton, prop] as [Skeleton, SkeletonProperty];
 }
 
