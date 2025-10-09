@@ -199,7 +199,10 @@ export default function createTextSkeletonAndPropertyFlow() {
         true
       );
       listener[0]();
-      _toolbar.removeListener = listener[1];
+      _toolbar.removeListener = () => {
+        listener[1]();
+        _toolbar.removeListener = () => {};
+      };
     });
   //   createSkeletonFromToolbarAndProperty(0, () => {
   //     const prop = new SkeletonProperty();

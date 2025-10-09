@@ -47,10 +47,10 @@ export function initToolbar() {
         const btn_selected = toolbar.getSelectedChild();
         if (btn_selected) {
           _toolbar.removeListener();
-          btn_selected && btn_selected.classList.remove('btn-selected');
-          btn_selected && ee.stopImmediatePropagation();
+          btn_selected.classList.remove('btn-selected');
         }
-        if (btn_selected !== e) e.classList.add('btn-selected');
+        if (btn_selected === e) ee.stopImmediatePropagation();
+        else e.classList.add('btn-selected');
       });
     });
   document.body.appendChild(toolbar.getElement());
