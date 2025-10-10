@@ -3,6 +3,7 @@ import G from '../global';
 import { setScalable } from '../lib/moveable';
 import Skeleton from '../model/Skeleton';
 import SkeletonProperty from '../model/SkeletonProperty';
+import RangePropertyItem from '../property_items/range';
 import SelectorPropertyItem from '../property_items/select';
 import VariantPropertyItem from '../property_items/variant';
 import Toolbar, { _toolbar } from '../toolbar';
@@ -90,14 +91,15 @@ export function handleCreateBackground(
   });
   prop.addItem(item);
 }
-// export function handleCreateOpacity(prop: SkeletonProperty, text_: Skeleton) {
-//   const item = new RangePropertyItem('Opacity', 0, 100, text_.getELement());
-//   item.setValue(100);
-//   item.handleChange((value, referenceElement) => {
-//     referenceElement.style.opacity = value + '%';
-//   });
-//   prop.addItem(item);
-// }
+export function handleCreateOpacity(prop: SkeletonProperty, text_: Skeleton) {
+  const item = new RangePropertyItem('Opacity', 0, 100, text_);
+  item.setValue(100);
+  item.setDisplay(true);
+  item.handleChange((value, referenceElement) => {
+    referenceElement.getELement().style.opacity = value + '%';
+  });
+  prop.addItem(item);
+}
 // export function handleCreateCustomCss(prop: SkeletonProperty, text_: Skeleton) {
 //   const item = new EditorPropertyItem('Custom Css', text_.getELement());
 //   const description = document.createElement('p');
@@ -179,6 +181,7 @@ function generateTextSkeletonAndItsProperty() {
   handleCreateFont(prop, skeleton);
   handleCreateColor(prop, skeleton);
   handleCreateBackground(prop, skeleton);
+  handleCreateOpacity(prop, skeleton);
   return [skeleton, prop] as [Skeleton, SkeletonProperty];
 }
 

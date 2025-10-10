@@ -1,0 +1,62 @@
+.range-container {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.range-wrapper {
+    position: relative;
+    flex: 1;
+    height: 40px;
+}
+
+.range-input {
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.range-track {
+    position: absolute;
+    top: 16px;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: black;
+    clip-path: polygon(0% 30%, 5% 45%, 15% 35%, 25% 50%, 35% 40%, 45% 55%,
+            55% 45%, 65% 60%, 75% 50%, 85% 65%, 95% 55%, 100% 70%,
+            100% 100%, 95% 85%, 85% 95%, 75% 80%, 65% 90%, 55% 75%,
+            45% 85%, 35% 70%, 25% 80%, 15% 65%, 5% 75%, 0% 60%);
+}
+
+.range-thumb {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background: black;
+    /* border: 3px solid #4ecdc4; */
+    border-radius: 50% 45% 55% 48%;
+    cursor: pointer;
+    transform: translate(-50%);
+    transition: transform 0.2s ease;
+}
+
+.range-thumb:hover {
+    transform: translateX(-50%) scale(1.1);
+}
+
+.value-display {
+    font-size: 16px;
+    font-weight: bold;
+    min-width: 30px;
+}
