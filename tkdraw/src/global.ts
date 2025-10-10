@@ -9,6 +9,8 @@ const G = {
   selecto: null as Selecto,
   infinite_viewer: null as InfiniteViewer,
   app_element: null as HTMLElement,
-  wrapper_element: null as HTMLElement
+  wrapper_element: null as HTMLElement,
+  min_z_index: -1,
+  max_z_index: 1
 };
 export default G;

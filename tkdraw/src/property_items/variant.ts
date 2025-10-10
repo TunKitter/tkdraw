@@ -31,8 +31,6 @@ class VariantPropertyItem extends SkeletonPropertyItem {
   handleChange(
     callback: (value: any, referenceElement: Skeleton) => void
   ): void {
-    console.log(this.styles);
-
     this.getElement().childNodes.forEach((e, i) => {
       // @ts-ignore
       e.onclick = () => callback(this.styles[i][1], this.getReferenceElement());

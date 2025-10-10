@@ -125,47 +125,42 @@ export function handleCreateOpacity(prop: SkeletonProperty, text_: Skeleton) {
 //   });
 //   prop.addItem(item);
 // }
-// export function handleCreateLayer(prop: SkeletonProperty, text_: Skeleton) {
-//   const div = document.createElement('div');
-//   Object.assign(div.style, {
-//     width: '1.4em',
-//     height: '1.4em',
-//     margin: '5px',
-//     borderRadius: '4px',
-//     background: 'black'
-//   });
-//   const item = new VariantPropertyItem(
-//     'Layer',
-//     div,
-//     ['box-shadow', 'zindex'],
-//     text_.getELement()
-//   );
-//   item.addVariant('2px 2px #ff73ea', 'min');
-//   item.addVariant('4px 4px #ff73ea', '-1');
-//   item.addVariant('3px 3px black', '1').style.background = '#ff73ea';
-//   item.addVariant('3px 5px black', 'max').style.background = '#ff73ea';
-
-//   item.handleChange((value, referenceElement) => {
-//     let zIndex = 0;
-//     switch (value[1]) {
-//       case 'min':
-//         zIndex = --G.min_z_index;
-//         break;
-//       case 'max':
-//         zIndex = ++G.max_z_index;
-//         break;
-//       default:
-//         zIndex =
-//           (parseInt(referenceElement.style.zIndex) || 0) +
-//           parseInt(value[1] || 0);
-//         break;
-//     }
-//     if (zIndex > G.max_z_index) G.max_z_index = ++zIndex;
-//     else if (zIndex < G.min_z_index) G.min_z_index = --zIndex;
-//     referenceElement.style.zIndex = zIndex;
-//   });
-//   prop.addItem(item);
-// }
+export function handleCreateLayer(prop: SkeletonProperty, text_: Skeleton) {
+  const div = document.createElement('div');
+  Object.assign(div.style, {
+    width: '1.4em',
+    height: '1.4em',
+    margin: '5px',
+    borderRadius: '4px',
+    background: 'black'
+  });
+  const item = new VariantPropertyItem('Layer', div, text_);
+  item.addVariant({ boxShadow: '2px 2px #ff73ea' }, 'min');
+  item.addVariant({ boxShadow: '4px 4px #ff73ea' }, '-1');
+  item.addVariant({ boxShadow: '3px 3px black', background: '#ff73ea' }, '1');
+  item.addVariant({ boxShadow: '3px 5px black', background: '#ff73ea' }, 'max');
+  item.getElement().style.justifyContent = 'flex-start';
+  item.handleChange((value, referenceElement) => {
+    let zIndex = 0;
+    switch (value) {
+      case 'min':
+        zIndex = --G.min_z_index;
+        break;
+      case 'max':
+        zIndex = ++G.max_z_index;
+        break;
+      default:
+        zIndex =
+          (parseInt(referenceElement.getELement().style.zIndex) || 0) +
+          parseInt(value || 0);
+        break;
+    }
+    if (zIndex > G.max_z_index) G.max_z_index = ++zIndex;
+    else if (zIndex < G.min_z_index) G.min_z_index = --zIndex;
+    referenceElement.getELement().style.zIndex = zIndex.toString();
+  });
+  prop.addItem(item);
+}
 function handleBehaviorMoveableTextSkeleton() {
   G.moveable.on(
     'click',
@@ -182,6 +177,7 @@ function generateTextSkeletonAndItsProperty() {
   handleCreateColor(prop, skeleton);
   handleCreateBackground(prop, skeleton);
   handleCreateOpacity(prop, skeleton);
+  handleCreateLayer(prop, skeleton);
   return [skeleton, prop] as [Skeleton, SkeletonProperty];
 }
 

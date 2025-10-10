@@ -1,8 +1,8 @@
 import G from './global';
 
-export function getHTML(selector: string, is_remove = false) {
+export function getHTML(selector: string, isRemove = false) {
   const item = G.html.querySelector(selector) as HTMLElement;
-  if (is_remove) item.remove();
+  if (isRemove) item.remove();
   return item.cloneNode(true) as HTMLElement;
 }
 
@@ -60,11 +60,11 @@ export function doubleClickToEdit(element: HTMLElement) {
 export function listenerToggle(
   element: HTMLElement,
   callback: (e: any) => void,
-  is_once: boolean = false
+  isOnce: boolean = false
 ) {
   return [
     () => {
-      element.addEventListener('click', callback, { once: is_once });
+      element.addEventListener('click', callback, { once: isOnce });
     },
     () => {
       element.removeEventListener('click', callback);
