@@ -3,12 +3,14 @@ import G from '../global';
 import { setScalable } from '../lib/moveable';
 import Skeleton from '../model/Skeleton';
 import SkeletonProperty from '../model/SkeletonProperty';
+import EditorPropertyItem from '../property_items/editor';
 import RangePropertyItem from '../property_items/range';
 import SelectorPropertyItem from '../property_items/select';
 import VariantPropertyItem from '../property_items/variant';
 import Toolbar, { _toolbar } from '../toolbar';
 import {
   doubleClickToEdit,
+  getRandomString,
   listenerToggle,
   setPositionAtCursor
 } from '../utility';
@@ -100,31 +102,32 @@ export function handleCreateOpacity(prop: SkeletonProperty, text_: Skeleton) {
   });
   prop.addItem(item);
 }
-// export function handleCreateCustomCss(prop: SkeletonProperty, text_: Skeleton) {
-//   const item = new EditorPropertyItem('Custom Css', text_.getELement());
-//   const description = document.createElement('p');
-//   description.innerHTML =
-//     "Add <span style='color: #ff73ea;font-size: 1em;'>!important</span> to the end of your css property to make it override above properties.";
-//   Object.assign(description.style, { color: 'gray', fontSize: '0.8em' });
-//   item
-//     .getWrapper()
-//     .querySelector('h1')!
-//     .insertAdjacentElement('afterend', description);
-//   let temp_styles = document.createElement('style');
-//   const className = getRandomString();
-//   text_.getELement().classList.add(className);
-//   item.handleChange(function (value) {
-//     value = `div.${className}.skeleton {${value}}`;
-//     temp_styles.remove();
-//     const style = document.createElement('style');
-//     style.type = 'text/css';
-//     if (style.styleSheet) style.styleSheet.cssText = value;
-//     else style.appendChild(document.createTextNode(value));
-//     document.head.appendChild(style);
-//     temp_styles = style;
-//   });
-//   prop.addItem(item);
-// }
+export function handleCreateCustomCss(prop: SkeletonProperty, text_: Skeleton) {
+  const item = new EditorPropertyItem('Custom Css', text_);
+  const description = document.createElement('p');
+  description.innerHTML =
+    "Add <span style='color: #ff73ea;font-size: 1em;'>!important</span> to the end of your css property to make it override above properties.";
+  Object.assign(description.style, { color: 'gray', fontSize: '0.8em' });
+  item
+    .getWrapper()
+    .querySelector('.skeleton_property_item_label')!
+    .insertAdjacentElement('afterend', description);
+  let temp_styles = document.createElement('style');
+  const className = getRandomString();
+  text_.getELement().classList.add(className);
+  item.handleChange(function (value) {
+    value = `div.${className}.skeleton {${value}}`;
+    temp_styles.remove();
+    const style = document.createElement('style');
+    style.type = 'text/css';
+    //@ts-ignore
+    if (style.styleSheet) style.styleSheet.cssText = value;
+    else style.appendChild(document.createTextNode(value));
+    document.head.appendChild(style);
+    temp_styles = style;
+  });
+  prop.addItem(item);
+}
 export function handleCreateLayer(prop: SkeletonProperty, text_: Skeleton) {
   const div = document.createElement('div');
   Object.assign(div.style, {
@@ -178,6 +181,7 @@ function generateTextSkeletonAndItsProperty() {
   handleCreateBackground(prop, skeleton);
   handleCreateOpacity(prop, skeleton);
   handleCreateLayer(prop, skeleton);
+  handleCreateCustomCss(prop, skeleton);
   return [skeleton, prop] as [Skeleton, SkeletonProperty];
 }
 

@@ -11,6 +11,7 @@ abstract class SkeletonPropertyItem {
     const wrapper = document.createElement('div');
     wrapper.classList.add('skeleton_property_item_wrapper');
     const labelElement = document.createElement('div');
+    labelElement.className = 'skeleton_property_item_label';
     labelElement.textContent = label;
     wrapper.appendChild(labelElement);
     wrapper.appendChild(this.element);
