@@ -2,6 +2,7 @@
 @import 'main.css';
 @import 'toolbar.css';
 @import 'skeleton/text.css';
+@import 'skeleton/shape.css';
 @import 'property_panel.css';
 @import 'property_item.css';
 @import 'property_item/select.css';

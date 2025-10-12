@@ -3,6 +3,7 @@ import { initInfiniteView } from './lib/infinite_viewer';
 import { initMoveable } from './lib/moveable';
 import { initSelecto } from './lib/selecto';
 import { handleRemoveSkeletonByDeleteKey } from './model/Skeleton';
+import createShapeSkeletonAndPropertyFlow from './skeleton/Shape';
 import createTextSkeletonAndPropertyFlow from './skeleton/Text';
 import { initToolbar } from './toolbar';
 (async function () {
@@ -15,4 +16,5 @@ import { initToolbar } from './toolbar';
   initInfiniteView();
   handleRemoveSkeletonByDeleteKey();
   createTextSkeletonAndPropertyFlow();
+  createShapeSkeletonAndPropertyFlow();
 })();

@@ -59,15 +59,16 @@ export function doubleClickToEdit(element: HTMLElement) {
 
 export function listenerToggle(
   element: HTMLElement,
+  event_name: string,
   callback: (e: any) => void,
   isOnce: boolean = false
 ) {
   return [
     () => {
-      element.addEventListener('click', callback, { once: isOnce });
+      element.addEventListener(event_name, callback, { once: isOnce });
     },
     () => {
-      element.removeEventListener('click', callback);
+      element.removeEventListener(event_name, callback);
     }
   ];
 }

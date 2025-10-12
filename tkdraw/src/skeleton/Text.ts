@@ -192,6 +192,7 @@ export default function createTextSkeletonAndPropertyFlow() {
     .addEventListener('click', function (toobar_btn) {
       const listener = listenerToggle(
         G.app_element,
+        'click',
         function (e: PointerEvent) {
           const [skeleton, prop] = generateTextSkeletonAndItsProperty();
           skeleton.render();
@@ -212,16 +213,4 @@ export default function createTextSkeletonAndPropertyFlow() {
         _toolbar.removeListener = () => {};
       };
     });
-  //   createSkeletonFromToolbarAndProperty(0, () => {
-  //     const prop = new SkeletonProperty();
-  //     const text_ = createTextSkeleton('Enter your text');
-  //     handleCreateFont(prop, text_);
-  //     handleCreateColor(prop, text_);
-  //     handleCreateBackground(prop, text_);
-  //     handleCreateLayer(prop, text_);
-  //     handleCreateOpacity(prop, text_);
-  //     handleCreateCustomCss(prop, text_);
-  //     text_.doubleClickToEdit();
-  //     return [text_, prop];
-  //   });
 }
