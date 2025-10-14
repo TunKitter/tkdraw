@@ -5,20 +5,43 @@ import { getSelectionElement } from '../lib/selecto';
 import Skeleton from '../model/Skeleton';
 import SkeletonProperty from '../model/SkeletonProperty';
 import Toolbar, { _toolbar } from '../toolbar';
+import toggleShowPropertyPanelWithSkeleton from '../flow/ToggleShowPropertyPanelWithSkeleton';
+import VariantPropertyItem from '../property_items/variant';
+function handleCreateShape(prop: SkeletonProperty, text_: Skeleton) {
+  const div = document.createElement('div');
+  Object.assign(div.style, {
+    width: '1.4em',
+    height: '1.4em',
+    margin: '5px',
+    borderRadius: '4px'
+  });
+  const item = new VariantPropertyItem('Shape', div, text_);
+  item.addVariant({ clipPath: 'none', background: '#6F00FF' }, 'none');
 
-// function handleCreateFont(prop: SkeletonProperty, text_: Skeleton) {
-//   const item = new SelectorPropertyItem('Font', text_);
-//   item.addOption('Times New Roman', 'times-new-roman');
-//   item.addOption('Arial', 'arial');
-//   item.addOption('Courier New', 'courier-new');
-//   item.addOption('Georgia', 'georgia');
-//   item.addOption('Verdana', 'verdana');
-//   item.handleChange((value, referenceElement) => {
-//     // @ts-ignore
-//     referenceElement.getELement().style.fontFamily = value;
-//   });
-//   prop.addItem(item);
-// }
+  item.addVariant(
+    { clipPath: 'circle(49% at 50% 50%)', background: '#F4991A' },
+    'circle(49% at 50% 50%)'
+  );
+
+  item.addVariant(
+    { clipPath: 'polygon(-1% 0%, 50% 86.6%, 100% 0%)', background: '#E45A92' },
+    'polygon(-1% 0%, 50% 86.6%, 100% 0%)'
+  );
+
+  item.addVariant(
+    {
+      clipPath: 'polygon(49% 0, 100% 50%, 50% 100%, 0 50%)',
+      background: '#19183B'
+    },
+    'polygon(49% 0, 100% 50%, 50% 100%, 0 50%)'
+  );
+
+  item.handleChange((value, referenceElement) => {
+    // handleBehaviorMoveableShapeSkeletonSelect(referenceElement, value[0]);
+    referenceElement.getELement().style.clipPath = value;
+  });
+  prop.addItem(item);
+}
 // function handleCreateColor(prop: SkeletonProperty, text_: Skeleton) {
 //   const div = document.createElement('div');
 //   Object.assign(div.style, {
@@ -148,6 +171,7 @@ function generateShapeSkeletonAndItsProperty() {
   text.className = 'shape_skeleton';
   const skeleton = new Skeleton(text);
   const prop = new SkeletonProperty();
+  handleCreateShape(prop, skeleton);
   // handleCreateFont(prop, skeleton);
   // handleCreateColor(prop, skeleton);
   // handleCreateBackground(prop, skeleton);
@@ -178,9 +202,13 @@ export default function createShapeSkeletonAndPropertyFlow() {
         div.style.width = `${e.rect.width / G.infinite_viewer.getZoomX()}px`;
         div.style.height = `${e.rect.height / G.infinite_viewer.getZoomY()}px`;
         elements[0].render();
-        _toolbar.removeListener();
+        elements[1].render();
+        G.moveable.target = elements[0].getELement();
+        setResizeable();
+        toggleShowPropertyPanelWithSkeleton(elements[0], elements[1]);
         //@ts-ignore
         toobar_btn.target!.classList.remove('btn-selected');
+        _toolbar.removeListener();
       }
 
       G.selecto.on('selectStart', prepareCreatingShape);

@@ -6,10 +6,11 @@ export function initMoveable() {
     draggable: true,
     resizable: true,
     renderDirections: ['nw', 'ne', 'sw', 'se'],
-    pinchable: true,
+    // pinchable: true,
     // roundable: true,
     // keepRatio: true,
     // checkInput: true,
+    rotatable: true,
     useResizeObserver: true,
     origin: false,
     edge: true,
@@ -24,7 +25,9 @@ export function initMoveable() {
   G.moveable.on('scale', e => {
     e.target.style.transform = e.afterTransform;
   });
-
+  G.moveable.on('rotate', e => {
+    e.target.style.transform = e.afterTransform;
+  });
   // G.moveable.on("round", (e) => {
   // e.target.style.borderRadius = e.borderRadius;
   // });
@@ -52,9 +55,12 @@ export function initMoveable() {
   //   });
 }
 export function setResizeable() {
-  G.moveable.resizable = true;
-  G.moveable.scalable = false;
+  G.moveable.resizable = false;
+  G.moveable.scalable = true;
   G.moveable.keepRatio = false;
+  // G.moveable.pinchable = true;
+  // G.moveable.pinchOutside = true;
+  // G.moveable.rotatable = true;
 }
 export function setScalable() {
   G.moveable.resizable = false;
