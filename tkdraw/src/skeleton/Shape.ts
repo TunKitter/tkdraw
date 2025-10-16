@@ -1,6 +1,6 @@
 import type { SelectoEvents } from 'selecto';
 import G from '../global';
-import { setResizeable } from '../lib/moveable';
+import { setResizeable, setScalable } from '../lib/moveable';
 import { getSelectionElement } from '../lib/selecto';
 import Skeleton from '../model/Skeleton';
 import SkeletonProperty from '../model/SkeletonProperty';
@@ -19,8 +19,8 @@ function handleCreateShape(prop: SkeletonProperty, text_: Skeleton) {
   item.addVariant({ clipPath: 'none', background: '#6F00FF' }, 'none');
 
   item.addVariant(
-    { clipPath: 'circle(49% at 50% 50%)', background: '#F4991A' },
-    'circle(49% at 50% 50%)'
+    { clipPath: 'circle(50% at 50% 50%)', background: '#F4991A' },
+    'circle(50% at 50% 50%)'
   );
 
   item.addVariant(
@@ -37,10 +37,50 @@ function handleCreateShape(prop: SkeletonProperty, text_: Skeleton) {
   );
 
   item.handleChange((value, referenceElement) => {
-    // handleBehaviorMoveableShapeSkeletonSelect(referenceElement, value[0]);
+    handleBehaviorMoveableShapeSkeletonSelect(
+      referenceElement.getELement(),
+      value
+    );
     referenceElement.getELement().style.clipPath = value;
   });
   prop.addItem(item);
+}
+function handleBehaviorMoveableShapeSkeletonSelect(
+  referenceElement: HTMLElement,
+  _value: string
+) {
+  if (_value.indexOf('circle') == 0) {
+    // @ts-ignore
+    let ori_scale = referenceElement.style.transform;
+    let _scale = ori_scale
+      .substring(
+        ori_scale.indexOf('scale('),
+        ori_scale.indexOf(')', ori_scale.indexOf('scale')) + 1
+      )
+      .replace('scale(', '')
+      .replace(')', '')
+      .replaceAll(' ', '')
+      .split(',');
+    if (
+      isNaN(parseInt(_scale[0]) + parseInt(_scale[1])) ||
+      typeof (parseInt(_scale[0]) + parseInt(_scale[1])) !== 'number' ||
+      _scale.length !== 2
+    )
+      _scale = [1, 1];
+    const radius = Math.min(
+      parseFloat(referenceElement.style.width.replace('px', '')) * _scale[0],
+      parseFloat(referenceElement.style.height.replace('px', '')) * _scale[1]
+    );
+
+    referenceElement.style.width = radius + 'px';
+    referenceElement.style.height = radius + 'px';
+    referenceElement.style.transform = ori_scale.replace(
+      `scale(${_scale[0]}, ${_scale[1]})`,
+      'scale(1,1)'
+    );
+    setScalable();
+    G.moveable.rotatable = false;
+  } else setResizeable();
 }
 // function handleCreateColor(prop: SkeletonProperty, text_: Skeleton) {
 //   const div = document.createElement('div');
@@ -161,10 +201,15 @@ function handleCreateShape(prop: SkeletonProperty, text_: Skeleton) {
 //   prop.addItem(item);
 // }
 function handleBehaviorMoveableShapeSkeleton() {
-  G.moveable.on(
-    'click',
-    e => e.target.classList.contains('shape_skeleton') && setResizeable()
-  );
+  G.moveable.on('click', e => {
+    if (e.target.classList.contains('shape_skeleton')) {
+      setResizeable();
+      handleBehaviorMoveableShapeSkeletonSelect(
+        e.target as HTMLElement,
+        e.target.style.clipPath
+      );
+    }
+  });
 }
 function generateShapeSkeletonAndItsProperty() {
   const text = document.createElement('div');

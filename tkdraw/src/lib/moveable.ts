@@ -60,10 +60,11 @@ export function setResizeable() {
   G.moveable.keepRatio = false;
   // G.moveable.pinchable = true;
   // G.moveable.pinchOutside = true;
-  // G.moveable.rotatable = true;
+  G.moveable.rotatable = true;
 }
 export function setScalable() {
   G.moveable.resizable = false;
   G.moveable.scalable = true;
   G.moveable.keepRatio = true;
+  G.moveable.rotatable = true;
 }
