@@ -93,6 +93,28 @@ export function handleCreateBackground(
   });
   prop.addItem(item);
 }
+export function handleCreateBorder(prop: SkeletonProperty, text_: Skeleton) {
+  const div = document.createElement('div');
+  Object.assign(div.style, {
+    width: '2em',
+    height: '2em',
+    borderRadius: '50%'
+  });
+  const item = new VariantPropertyItem('Background', div, text_);
+  item.addVariant({ border: '2px solid black' }, 'white');
+  item.addVariant({ background: 'black' }, 'black');
+  item.addVariant({ background: '#FFD93D' }, '#FFD93D');
+  item.addVariant({ background: '#E4004B' }, '#E4004B');
+  item.addVariant({ background: '#33A1E0' }, '#33A1E0');
+  const picker = createColorPickerElement(value => {
+    text_.getELement().style.border = '2px solid ' + value;
+  });
+  item.getElement().appendChild(picker);
+  item.handleChange((value, referenceElement) => {
+    referenceElement.getELement().style.border = '2px solid ' + value;
+  });
+  prop.addItem(item);
+}
 export function handleCreateOpacity(prop: SkeletonProperty, text_: Skeleton) {
   const item = new RangePropertyItem('Opacity', 0, 100, text_);
   item.setValue(100);
@@ -179,6 +201,7 @@ function generateTextSkeletonAndItsProperty() {
   handleCreateFont(prop, skeleton);
   handleCreateColor(prop, skeleton);
   handleCreateBackground(prop, skeleton);
+  handleCreateBorder(prop, skeleton);
   handleCreateOpacity(prop, skeleton);
   handleCreateLayer(prop, skeleton);
   handleCreateCustomCss(prop, skeleton);
