@@ -213,6 +213,7 @@ export default function createTextSkeletonAndPropertyFlow() {
   Toolbar.getInstance()
     .getChildAt(0)
     .addEventListener('click', function (toobar_btn) {
+      // G.moveable.target = null;
       const listener = listenerToggle(
         G.app_element,
         'click',

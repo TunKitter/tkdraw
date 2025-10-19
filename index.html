@@ -1,55 +1,15 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tkdraw</title>
+    <link rel="stylesheet" href="style/style.css">
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vite + TS</title>
-</head>
-
-<body>
-  <div class="root">
-    <div class="container"></div>
-  </div>
-  <!-- <div class="tools">
-    <h1>Font size</h1>
-    <div class="range-container">
-      <div class="range-wrapper">
-        <input type="range" class="range-input" min="0" max="100" value="50" id="handDrawnRange">
-        <div class="range-track"></div>
-        <div class="range-fill" id="rangeFill"></div>
-        <div class="range-thumb" id="rangeThumb"></div>
-      </div>
-      <div class="value-display" id="valueDisplay">50</div>
-    </div>
-    <h1>Color</h1>
-    <div class="colors"
-      style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1em;margin-top: 1em;">
-      <div class="circle" style="--bg-color: #E62727"></div>
-      <div class="circle" style="--bg-color: #FFD93D"></div>
-      <div class="circle" style="--bg-color: #06923E"></div>
-      <div class="circle" style="--bg-color: #212121"></div>
-      <div class="circle" style="--bg-color: #471396"></div>
-      <div class="circle" style="--bg-color: #03A6A1"></div>
-    </div>
-  </div> -->
-  <script type="module" src="/src/main.ts"></script>
-  <!-- <script>
-    const rangeInput = document.getElementById('handDrawnRange');
-    const rangeThumb = document.getElementById('rangeThumb');
-    const valueDisplay = document.getElementById('valueDisplay');
-
-    function updateRange() {
-      const value = rangeInput.value;
-      const percentage = (value - rangeInput.min) / (rangeInput.max - rangeInput.min) * 100;
-      rangeThumb.style.left = percentage + '%';
-      valueDisplay.textContent = value;
-    }
-
-    rangeInput.addEventListener('input', updateRange);
-    updateRange();
-  </script> -->
-</body>
-
+  <body>
+    <div id="app"><div id="wrapper"></div></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
