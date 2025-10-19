@@ -55,6 +55,7 @@ function handleBehaviorMoveableShapeSkeletonSelect(
   referenceElement: HTMLElement,
   _value: string
 ) {
+  if (!referenceElement.classList.contains('shape_skeleton')) return;
   if (_value.indexOf('circle') == 0) {
     // @ts-ignore
     let ori_scale = referenceElement.style.transform;
