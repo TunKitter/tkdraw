@@ -17,3 +17,21 @@ body {
     /* overflow: hidden; */
     /* background: blue; */
 }
+
+#zoom {
+    cursor: pointer;
+    user-select: none;
+    position: fixed;
+    left: 1em;
+    bottom: 1em;
+    background-color: #ff73ea;
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    justify-content: center;
+    width: 5em;
+    height: 3em;
+    z-index: 9999;
+    border-radius: 5px;
+    border-bottom: 7px solid;
+}
