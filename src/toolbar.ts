@@ -35,7 +35,7 @@ export function initToolbar() {
   const toolbar = Toolbar.getInstance();
   toolbar.add('Text');
   toolbar.add('Shape');
-  toolbar.add('Shape');
+  toolbar.add('Draw');
   toolbar.add('Shape');
   toolbar.add('Shape');
   toolbar.add('Shape');

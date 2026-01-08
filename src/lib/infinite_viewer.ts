@@ -6,7 +6,8 @@ export function initInfiniteView() {
     displayHorizontalScroll: false,
     displayVerticalScroll: false,
     zoomRange: [0.01, 3],
-    useAutoZoom: true
+    useAutoZoom: true,
+    wheelScale:0.002
   });
   const info = document.querySelector('#zoom p')!;
   G.infinite_viewer.on('scroll', e => {
