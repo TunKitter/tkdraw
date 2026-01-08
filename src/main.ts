@@ -5,6 +5,7 @@ import { initSelecto } from './lib/selecto';
 import { handleRemoveSkeletonByDeleteKey } from './model/Skeleton';
 import createShapeSkeletonAndPropertyFlow from './skeleton/Shape';
 import createTextSkeletonAndPropertyFlow from './skeleton/Text';
+import createWebviewSkeletonAndPropertyFlow from './skeleton/Webview';
 import createYoutubeFrameSkeletonAndPropertyFlow from './skeleton/YoutubeFrame';
 import { initToolbar } from './toolbar';
 (async function () {
@@ -19,4 +20,5 @@ import { initToolbar } from './toolbar';
   createTextSkeletonAndPropertyFlow();
   createShapeSkeletonAndPropertyFlow();
   createYoutubeFrameSkeletonAndPropertyFlow()
+  createWebviewSkeletonAndPropertyFlow()
 })();

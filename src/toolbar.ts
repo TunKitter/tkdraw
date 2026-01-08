@@ -36,7 +36,7 @@ export function initToolbar() {
   toolbar.add('Text');
   toolbar.add('Shape');
   toolbar.add('Youtube');
-  toolbar.add('Shape');
+  toolbar.add('Webview');
   toolbar.add('Shape');
   toolbar.add('Shape');
   toolbar

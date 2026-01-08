@@ -100,7 +100,7 @@ export function handleCreateBorder(prop: SkeletonProperty, text_: Skeleton) {
     height: '2em',
     borderRadius: '50%'
   });
-  const item = new VariantPropertyItem('Background', div, text_);
+  const item = new VariantPropertyItem('Border', div, text_);
   item.addVariant({ border: '2px solid black' }, 'white');
   item.addVariant({ background: 'black' }, 'black');
   item.addVariant({ background: '#FFD93D' }, '#FFD93D');
