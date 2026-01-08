@@ -73,10 +73,10 @@ function generateShapeSkeletonAndItsProperty() {
   return [skeleton, prop] as [Skeleton, SkeletonProperty];
 }
 
-export default function createWebviewSkeletonAndPropertyFlow() {
+export default function createImageSkeletonAndPropertyFlow() {
   handleBehaviorMoveableShapeSkeleton();
   Toolbar.getInstance()
-    .getChildAt(3)
+    .getChildAt(4)
     .addEventListener('click', function (toobar_btn) {
       function prepareCreatingShape() {
         getSelectionElement()?.classList.add('select_selection_shape');
@@ -103,7 +103,7 @@ export default function createWebviewSkeletonAndPropertyFlow() {
         //@ts-ignore
         toobar_btn.target!.classList.remove('btn-selected');
         _toolbar.removeListener();
-        const url = prompt('Enter an URL (some websites might not work):') as string;
+        const url = prompt('Enter an image url:') as string;
         if(!isValidHttpUrl(url)) {
           alert('Invalid URL')
           div.remove()
@@ -111,28 +111,7 @@ export default function createWebviewSkeletonAndPropertyFlow() {
           G.moveable.target = null
           return
         }
-        const overlay = document.createElement('div')
-        Object.assign(overlay.style,{
-          position:'absolute',
-          top:0,
-          left:0,
-          right:0,
-          bottom:0,
-          zIndex:9999,
-          background:'#000000b5',
-          display:'flex',
-          justifyContent:'center',
-          alignItems:'center',
-          color:'white',
-          cursor:'pointer'
-        });
-        overlay.textContent ='Double click to interact'
-        overlay.ondblclick = () => {
-          overlay.style.zIndex = '-9999'
-          G.selecto.on('selectEnd', () => overlay.style.zIndex = '9999');
-        }
-        div.innerHTML = `<iframe src="${url}" width="100%" height="100%"></iframe>`
-        div.appendChild(overlay)
+        div.innerHTML = `<img src="${url}" width="100%" height="100%" />`;
       }
 
       G.selecto.on('selectStart', prepareCreatingShape);

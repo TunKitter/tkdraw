@@ -37,8 +37,7 @@ export function initToolbar() {
   toolbar.add('Shape');
   toolbar.add('Youtube');
   toolbar.add('Webview');
-  toolbar.add('Shape');
-  toolbar.add('Shape');
+  toolbar.add('Image');
   toolbar
     .getElement()
     .querySelectorAll('button')

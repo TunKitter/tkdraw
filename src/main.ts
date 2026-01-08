@@ -3,6 +3,7 @@ import { initInfiniteView } from './lib/infinite_viewer';
 import { initMoveable } from './lib/moveable';
 import { initSelecto } from './lib/selecto';
 import { handleRemoveSkeletonByDeleteKey } from './model/Skeleton';
+import createImageSkeletonAndPropertyFlow from './skeleton/Image';
 import createShapeSkeletonAndPropertyFlow from './skeleton/Shape';
 import createTextSkeletonAndPropertyFlow from './skeleton/Text';
 import createWebviewSkeletonAndPropertyFlow from './skeleton/Webview';
@@ -21,4 +22,5 @@ import { initToolbar } from './toolbar';
   createShapeSkeletonAndPropertyFlow();
   createYoutubeFrameSkeletonAndPropertyFlow()
   createWebviewSkeletonAndPropertyFlow()
+  createImageSkeletonAndPropertyFlow()
 })();
